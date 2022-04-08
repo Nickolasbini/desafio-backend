@@ -11,7 +11,7 @@ Utilizando de um formato de aplicação rest API, está gera relatórios a parti
 
 ## Instalação
 
-Para buscar dependencias do projeto
+Para buscar dependências do projeto
 ```
   composer update
 ```
