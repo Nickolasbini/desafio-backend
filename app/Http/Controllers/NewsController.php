@@ -80,7 +80,6 @@ class NewsController extends Controller
         $response['success'] = true;
         $response['content']['quantidade'] = $result['quantity'];
         $response['content']['noticias']   = $result['news'];
-        //$response['category'] = $categoryName;
         return json_encode($response);
     }
 }
