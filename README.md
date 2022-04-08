@@ -1,50 +1,123 @@
-## Convergence Works
-Somos a Convergence Works, somos a convergência entre os desafios das empresas e as ideias pra vencê-los. Desenvolvemos plataformas para o mundo digital, com foco em comunicação. Somos especialistas na criação de sites e aplicativos para plataformas de comunicação. Integramos sistema de gestão de conteúdo, aplicativo, disparo de email, solução para clube de assinantes, implantação de editoriais em múltiplas plataformas.
+## ConvergeceWorks - correiosrss
 
-## Descrição da vaga
-Conhecimento e habilidades em: 
-+ Frameworks em PHP (Laravel, Symfony, ...)
-+ Inglês Técnico 
-+ Git
-+ Metodologia ágil
-+ Capacidade de trabalhar em equipe, boa comunicação, comprometimento e organização; 
-+ Vontade de aprender novas tecnologias de mercado. 
+Aplicação responsável por consumir um arquivo XML proveniente de https://www.correio24horas.com.br/rss/ e gerar um relatório em formato JSON 
+contendo uma lista de notícias.
 
-## Local
-Vaga 100% remota, empresa de Salvador/BA
+Utilizando de um formato de aplicação rest API, está gera relatórios a partir dos dados consumidos pelo serviço acima e os filtra em diferentes formatos.
 
-## O desafio
-Para avaliar seu desempenho temos um desafio para você.
+## Requisitos
 
-Você deverá fazer um fork deste repositório, e desenvolver um relatório sobre a publicação de notícias. A aplicação deverá consumir a seguinte fonte de dados RSS [https://www.correio24horas.com.br/rss/] e entregar em formato JSON a quantidade e uma lista com o titulo (campo title) das notícias encontradas obedecendo dois critérios:
+* PHP >= 7.3
 
-### Notícias publicadas hoje
-Exemplo de output
+## Instalação
+
+Para buscar dependencias do projeto
+```
+  composer update
+```
+
+Para gerar um servidor local
+```
+  php artisan serve
+```
+
+## Utilização
+
+Está rota é responsável pela realização relatórios.
+
+```
+  GET api/news
+```
+
 ```json
-{	
-	"quantidade": 4,
-	"noticias":["Trabalho remoto monitorado","As aulas da B3 são 100% on-line e gravadas; confira como participar","Do jornalismo para a música: Luana Assiz lança clipe Espelho de Oxum","Em série do Globoplay, talentos se juntam para compor canção coletiva"]
+  {
+    "success": true,
+    "error": null,
+    "content": {
+        "quantidade": 20,
+        "noticias": [
+            "Capes disponibiliza 3.561 bolsas a 213 instituições de ensino superior",
+            "Jorge Vercillo comemora 30 anos de carreira com show Raça Menina",
+            "Vereador Gabriel Monteiro é alvo de operação no Rio de Janeiro",
+            "O amor existe",
+            " Cantoras baianas estão entre as 35 escolhidas para o livro Cantadas",
+            "Balé Folclórico retorna com oficinas, nova montagem e a certeza da força do coletivo",
+            "Estreia: “Histórias da vida” traz relatos de baianos que usaram a arte como ferramenta de superação",
+            "Programa capacita jovens de baixa renda para mercado de trabalho; veja como participar",
+            "Terapia: um canal sobre histórias reais de pessoas reais que desembarcou na Bahia",
+            "Oito empregadores baianos estão na nova lista suja do trabalho escravo; saiba quais",
+            "Homem arremessou mulher de moto antes de matá-la a pedradas, dizem testemunhas",
+            "Alunas do Colégio Modelo de Camaçari denunciam professores por assédio ",
+            " Guia: tudo o que você precisa saber sobre o uso das máscaras em Salvador",
+            "Vinho e Páscoa: 9 dicas para uma harmonização perfeita",
+            "Horóscopo de 7/4: veja previsões para esta quinta",
+            "Cuidado com a geladeira que você herdou",
+            "Pesquisa mostra que Nordeste definirá vencedor do duelo Lula x Bolsonaro",
+            "Reconhecimento de paternidade cresce mais de 10 vezes na Bahia em três anos",
+            "'É bíblico' diz homem enquanto estuprava a filha",
+            "Mega-Sena acumula e próximo concurso deve pagar R$ 45 milhões"
+        ]
+    }
 }
 ```
 
-### Notícias filtradas por categoria
-Exemplo de output para *Noticias que pertençam a **"categoria" "tecnoporto"**.* 
+Para realizar relatórios filtrados por uma categoria específica
+
+```
+  GET api/news/category/{categoryName}
+```
+
 ```json
-{
-	"quantidade":1,
-	"noticias":["Trabalho remoto monitorado"]
+  {
+    "success": true,
+    "error": null,
+    "content": {
+        "quantidade": 1,
+        "noticias": [
+            "Vereador Gabriel Monteiro é alvo de operação no Rio de Janeiro"
+        ]
+    },
+    "category": "brasil"
 }
 ```
 
-Você deve descrever no README.md do projeto Git as decisões de implementação que forem relevantes, junto das instruções de como compilar (build) e executar a sua aplicação. Você pode utilizar bibliotecas de código aberto (open source) que acredite serem adequadas, mas por favor tente limitar o uso de ferramentas desnecessárias.
+Para realizar relatório contendo todas as categorias
 
-## Critérios de Avaliação
-+ Organização
-+ Semântica
-+ Decisões Técnicas
-+ Ferramentas Utilizadas
-+ Desejável: Testes unitários
+```
+  GET api/newscategory
+```
 
- 
+```json
+  {
+    "success": true,
+    "error": null,
+    "content": {
+        "quantidade": 14,
+        "noticias": [
+            "entretenimento",
+            "educação",
+            "brasil",
+            "nelson cadena",
+            "marrom",
+            "de volta",
+            "estúdio correio",
+            "bahia",
+            "salvador",
+            "paula theotonio",
+            "oscar quiroga",
+            "artigo",
+            "satélite",
+            "em alta"
+        ]
+    }
+}
+```
 
+## Teste
+
+Para realização do teste unitário
+
+```
+  php artisan test
+```
 
