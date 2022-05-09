@@ -113,11 +113,3 @@ Para realizar relatório contendo todas as categorias
 }
 ```
 
-## Teste
-
-Para realização do teste unitário
-
-```
-  php artisan test
-```
-
